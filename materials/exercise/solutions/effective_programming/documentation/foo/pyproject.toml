@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "test-package"
+version = "0.1.0"
+description = ""
+authors = ["Marvin Taschenberger <marvin.taschenberger@ultratendency.com>"]
+readme = "README.md"
+packages = [{include = "test_package"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pandas = "^1.5.3"
+numpy = "^1.24.2"
+sklearn = "^0.0.post1"
+sphinx = "^6.1.3"
+mypy = "^1.1.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

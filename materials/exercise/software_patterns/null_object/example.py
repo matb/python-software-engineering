@@ -34,11 +34,15 @@ class MockAPIWrapper:
             return DataPoint(**data)
         return None
 
+    def call_rest_api(self, id):
+        """ This mocks a rest api call and unwrapping the json object"""
+        return self.data.get(id, {})
+
 
 @dataclasses.dataclass
 class DataPipeline:
     source: MockAPIWrapper
-    ids: typing.List[int]
+    ids = typing.List[int]
 
     def main(self):
         rate = self.process_score(self.ids)
@@ -51,7 +55,7 @@ class DataPipeline:
             if not i:
                 continue
             counter += 1
-            data = self.source.get(i)
+            data = self.source.get(id)
             if data.did_pass():
                 passed += 1
         return passed / counter
@@ -59,5 +63,5 @@ class DataPipeline:
 
 if __name__ == '__main__':
     api_wrapper = MockAPIWrapper()
-    pipeline = DataPipeline(api_wrapper, [1, 2, 3, 4])
+    pipeline = DataPipeline(api_wrapper)
     pipeline.main()
